@@ -31,7 +31,12 @@ var spelerY = 600; // y-positie van speler
  */
 var beweegAlles = function() {
   // speler
-
+const KEY_LINKS = 37;
+const KEY_RECHTS = 39;
+var keyRechtsDownToen = false;
+var keyRechtsDownNu = false;
+var keyLinksDownToen = false;
+var keyLinksDownNu = false;
   // vijand
 
   // kogel
