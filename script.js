@@ -11,16 +11,23 @@
  */
 ///<reference path="p5.global-mode.d.ts" />
 "use strict"
-
-/* ********************************************* */
-/* globale variabelen die je gebruikt in je game */
-/* ********************************************* */
 const SPELEN = 1;
 const GAMEOVER = 2;
 var spelStatus = SPELEN;
 
+const KEY_LEFT = 37;
+const KEY_RIGHT = 39;
+const KEY_UP = 38;
+const KEY_DOWN = 40;
+
+/* ********************************************* */
+/* globale variabelen die je gebruikt in je game */
+/* ********************************************* */
+
 var spelerX = 600; // x-positie van speler
 var spelerY = 600; // y-positie van speler
+
+var img; // plaatje
 
 /* ********************************************* */
 /* functies die je gebruikt in je game           */
@@ -31,12 +38,23 @@ var spelerY = 600; // y-positie van speler
  */
 var beweegAlles = function() {
   // speler
-const KEY_LINKS = 37;
-const KEY_RECHTS = 39;
-var keyRechtsDownToen = false;
-var keyRechtsDownNu = false;
-var keyLinksDownToen = false;
-var keyLinksDownNu = false;
+  if (keyIsDown(KEY_LEFT)){
+    spelerX = spelerX -2;
+  }
+
+  if (keyIsDown(KEY_RIGHT)){
+    spelerX = spelerX +2;
+  }
+
+  if (keyIsDown(KEY_UP)){
+    spelerY = spelerY -2;
+  }
+
+  if (keyIsDown(KEY_DOWN)){
+    spelerY = spelerY +2;
+  }
+
+  
   // vijand
 
   // kogel
@@ -61,7 +79,8 @@ var verwerkBotsing = function() {
  */
 var tekenAlles = function() {
   // achtergrond
-
+  fill("blue");
+  rect(0, 0, 1500, 1900);
   // vijand
 
   // kogel
@@ -85,10 +104,19 @@ var checkGameOver = function() {
   return false;
 };
 
+
+
+ 
 /* ********************************************* */
 /* setup() en draw() functies / hoofdprogramma   */
 /* ********************************************* */
+function preload() {
+  img_background = loadImage('animalCrossing.jpeg'); // achtergrond plaatje
+}
 
+function setup() { 
+  image(img, 0, 0);
+}
 /**
  * setup
  * de code in deze functie wordt één keer uitgevoerd door
