@@ -111,7 +111,7 @@ var checkGameOver = function() {
 /* setup() en draw() functies / hoofdprogramma   */
 /* ********************************************* */
 function preload() {
-  img_background = loadImage('animalCrossing.jpeg'); // achtergrond plaatje
+  img = loadImage('animalCrossing.jpeg'); // achtergrond plaatje
 }
 
 function setup() { 
