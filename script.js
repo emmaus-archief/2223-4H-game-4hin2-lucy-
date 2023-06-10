@@ -170,20 +170,20 @@ var beweegAlles = function () {
  */
 
 var verwerkBotsing = (rectHoogte) => {
-  // botsing speler tegen pop via alle 3 de banen
-  if (spelerX === BAAN_LINKS_X && // de botsing van de eerste (links) alien
+  // botsing speler tegen perzik via alle 3 de banen
+  if (spelerX === BAAN_LINKS_X && // de botsing van de eerste (links) plant
     spelerY - metroLinksY > 0 &&
     spelerY - metroLinksY < rectHoogte) {
     spelStatus = GAMEOVER;
   }
 
-  if (spelerX === BAAN_RECHTS_X && // de botsing van de tweede (midden) alien
+  if (spelerX === BAAN_RECHTS_X && // de botsing van de tweede (midden) plant
     spelerY - metroRechtsY > 0 &&
     spelerY - metroRechtsY < rectHoogte) {
     spelStatus = GAMEOVER;
   }
 
-  if (spelerX === BAAN_MIDDEN_X && // de botsing van de derde (rechts) alien
+  if (spelerX === BAAN_MIDDEN_X && // de botsing van de derde (rechts) plant
     spelerY - metroMiddenY > 0 &&
     spelerY - metroMiddenY < rectHoogte) {
     spelStatus = GAMEOVER;
@@ -191,20 +191,20 @@ var verwerkBotsing = (rectHoogte) => {
 };
 
 var verwerkBotsingMetCoins = (rectHoogte) => {
-  // botsing speler met coins op alle 3 de banen
-  if (spelerX === BAAN_LINKS_X && // de botsing van de eerste (links) alien
+  
+  if (spelerX === BAAN_LINKS_X && // de botsing van de eerste (links) plant
     spelerY - metroLinksY > 0 &&
     spelerY - metroLinksY < rectHoogte) {
     score += 10000;
   }
 
-  if (spelerX === BAAN_RECHTS_X && // de botsing van de tweede (midden) alien
+  if (spelerX === BAAN_RECHTS_X && // de botsing van de tweede (midden) plant
     spelerY - metroRechtsY > 0 &&
     spelerY - metroRechtsY < rectHoogte) {
     spelStatus = GAMEOVER;
   }
 
-  if (spelerX === BAAN_MIDDEN_X && // de botsing van de derde (rechts) alien
+  if (spelerX === BAAN_MIDDEN_X && // de botsing van de derde (rechts) plant
     spelerY - metroMiddenY > 0 &&
     spelerY - metroMiddenY < rectHoogte) {
     spelStatus = GAMEOVER;
@@ -216,21 +216,14 @@ var verwerkBotsingMetCoins = (rectHoogte) => {
  */
 var tekenAlles = function (rectHoogte) {
   image(img_background,0,0,1280,720); // schermvullend plaatje op de achtergrond
-  // round(random(1, 3));
-  // Teken achtergrond van alien
-  fill("blue"); // achtergrond van alien
-  // rect(metroLinksX, metroLinksY, 200, rectHoogte); // linkeralien vak
-  // rect(metroMiddenX, metroMiddenY, 200, rectHoogte); // middennalien vak
-  // rect(metroRechtsX, metroRechtsY, 200, rectHoogte); // rechteralien vak
-  image(img, metroLinksX, metroLinksY, 200, rectHoogte);
-  image(img, metroMiddenX, metroMiddenY, 200, rectHoogte);
-  image(img, metroRechtsX, metroRechtsY, 200, rectHoogte);
+  image(img, metroLinksX, metroLinksY, 100, rectHoogte);
+  image(img, metroMiddenX, metroMiddenY, 100, rectHoogte);
+  image(img, metroRechtsX, metroRechtsY, 100, rectHoogte);
 
   // vorm van de speler
-  //fill("white");
-image(img2, spelerX - 55, spelerY - 105, 100, 100);
-  //fill("black");
-  //ellipse(spelerX, spelerY, 10, 10);
+ 
+  image(img2, spelerX - 122, spelerY - 25, 150, 150);
+  
 
 };
 
@@ -260,7 +253,7 @@ var checkGameOver = function () { // kijkt of game over game over is
 /* setup() en draw() functies / hoofdprogramma   */
 /* ********************************************* */
 function preload() {
-  img = loadImage('Drawing.png'); // plaatje laden voor cinnamoroll
+  img = loadImage('peach.png'); // plaatje laden voor perzik
   img_background = loadImage('animalCrossing.jpeg'); // achtergrond plaatje
   img_uitleg = loadImage('home.jpg'); // achtergrond plaatje
   img2 = loadImage('piranha.gif');
@@ -272,7 +265,7 @@ function preload() {
  */
 function setup() { // een canvas (rechthoek) waarin je je speelveld kunt tekenen
   createCanvas(1280, 720);
-  vijandX=random(300,600);
+  vijandX=random(300, 600);
 }
 // x
 /**
@@ -289,7 +282,7 @@ function draw() {
     document.getElementById('score').className = "show";
 
     // Teken de rest
-    var rectHoogte = 200;
+    var rectHoogte = 100;
     beweegAlles();
     verwerkBotsing(rectHoogte);
     tekenAlles(rectHoogte);
@@ -311,9 +304,10 @@ function draw() {
 
   // teken game-over scherm
   if (spelStatus === GAMEOVER) {
-    fill('cornsilk');
+    fill('black');
     textSize (80);
     textAlign(CENTER);
+    textStyle ("bold")
     text("game over, press space to start", 640, 360);
     if (keyIsDown(32)) { // spatie om opnieuw te starten
       spelerX = BAAN_LINKS_X
